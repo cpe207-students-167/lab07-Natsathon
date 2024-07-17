@@ -18,46 +18,38 @@
     <script src="./scripts/script.js" defer></script>
     <link href="./css/style.css" rel="stylesheet" />
   </head>
-  <body class="p-3">
-    <div class="mx-auto vstack gap-2" style="width: 400px">
-      <h3 class="text-center">Registration</h3>
-      <div class="d-flex gap-2">
-        <div>
-          <label class="form-label">First name</label>
-          <input class="form-control" id="first-name-input" />
-          <div class="invalid-feedback">Invalid first name</div>
+  <div class="container">
+    <h2>Registration Form</h2>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="First Name">
+            <small>Error message</small>
         </div>
-        <div>
-          <label class="form-label">Last name</label>
-          <input class="form-control" id="last-name-input" />
-          <div class="invalid-feedback">Invalid last name</div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Last Name">
+            <small>Error message</small>
         </div>
-      </div>
-      <div>
-        <label class="form-label">Email</label>
-        <input class="form-control" id="email-input" />
-        <div class="invalid-feedback">Invalid email format</div>
-      </div>
-      <div>
-        <label class="form-label">Password</label>
-        <input class="form-control" type="password" id="password-input" />
-        <div class="invalid-feedback">Require at least 6 characters</div>
-      </div>
-      <div>
-        <label class="form-label">Confirm Password</label>
-        <input
-          class="form-control"
-          type="password"
-          id="password-confirm-input"
-        />
-        <div class="invalid-feedback">
-          Password mismatch or invalid password
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email">
+            <small>Error message</small>
         </div>
-      </div>
-
-      <div class="d-flex justify-content-end gap-2">
-        <button id="submit-btn" class="btn btn-success my-2">Register</button>
-      </div>
-    </div>
-  </body>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password">
+            <small>Error message</small>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+            <small>Error message</small>
+        </div>
+        <button type="button" onclick="validateForm()">Register</button>
+        <button type="reset" onclick="resetForm()">Reset</button>
+    </form>
+</div>
+<script src="scripts.js"></script>
+</body>
 </html>
