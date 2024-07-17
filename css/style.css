@@ -12,10 +12,12 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
 }
 
 h2 {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .form-group {
@@ -34,17 +36,18 @@ h2 {
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
+  display: block;
 }
 
 .form-group input:focus {
   border-color: #007bff;
 }
 
-.form-group input.error {
+.form-group input.is-invalid {
   border-color: red;
 }
 
-.form-group input.success {
+.form-group input.is-valid {
   border-color: green;
 }
 
@@ -65,17 +68,17 @@ button {
   color: white;
   cursor: pointer;
   font-size: 16px;
+  margin-top: 10px;
 }
 
 button:hover {
   background: #0056b3;
 }
 
-button[type="reset"] {
+button[type="button"]:nth-child(2) {
   background: #6c757d;
-  margin-top: 10px;
 }
 
-button[type="reset"]:hover {
+button[type="button"]:nth-child(2):hover {
   background: #5a6268;
 }

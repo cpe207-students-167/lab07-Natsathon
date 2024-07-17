@@ -18,38 +18,39 @@
     <script src="./scripts/script.js" defer></script>
     <link href="./css/style.css" rel="stylesheet" />
   </head>
-  <div class="container">
-    <h2>Registration Form</h2>
-    <form id="registrationForm">
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" placeholder="First Name">
-            <small>Error message</small>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" placeholder="Last Name">
-            <small>Error message</small>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Email">
-            <small>Error message</small>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Password">
-            <small>Error message</small>
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" placeholder="Confirm Password">
-            <small>Error message</small>
-        </div>
-        <button type="button" onclick="validateForm()">Register</button>
-        <button type="reset" onclick="resetForm()">Reset</button>
-    </form>
-</div>
-<script src="scripts.js"></script>
+  <body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="first-name-input">First Name</label>
+                <input type="text" id="first-name-input" placeholder="ณัฐสธน">
+                <small>Error message</small>
+            </div>
+            <div class="form-group">
+                <label for="last-name-input">Last Name</label>
+                <input type="text" id="last-name-input" placeholder="พันธุ์อำพัน">
+                <small>Error message</small>
+            </div>
+            <div class="form-group">
+                <label for="email-input">Email</label>
+                <input type="email" id="email-input" placeholder="660612145">
+                <small>Error message</small>
+            </div>
+            <div class="form-group">
+                <label for="password-input">Password</label>
+                <input type="password" id="password-input" placeholder="Password">
+                <small>Error message</small>
+            </div>
+            <div class="form-group">
+                <label for="password-confirm-input">Confirm Password</label>
+                <input type="password" id="password-confirm-input" placeholder="Confirm Password">
+                <small>Error message</small>
+            </div>
+            <button type="button" id="submit-btn">Register</button>
+            <button type="button" id="reset-btn">Reset</button>
+        </form>
+    </div>
+    <script src="scripts.js"></script>
 </body>
 </html>

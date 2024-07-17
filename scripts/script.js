@@ -1,89 +1,102 @@
-function showError(input, message) {
-    const formGroup = input.parentElement;
-    const small = formGroup.querySelector('small');
-    small.innerText = message;
+const firstNameInput = document.querySelector("#first-name-input");
+const lastNameInput = document.querySelector("#last-name-input");
+const emailInput = document.querySelector("#email-input");
+const passwordInput = document.querySelector("#password-input");
+const confirmPasswordInput = document.querySelector("#password-confirm-input");
+
+const submitBtn = document.querySelector("#submit-btn");
+const resetBtn = document.querySelector("#reset-btn");
+
+function validateEmail(email) {
+  var atPos = email.indexOf("@");
+  var dotPos = email.lastIndexOf(".");
+  return atPos > 0 && dotPos > atPos + 1 && dotPos < email.length - 1;
+}
+
+function toggleError(input, isValid) {
+  const small = input.nextElementSibling;
+  if (isValid) {
+    input.classList.remove('is-invalid');
+    input.classList.add('is-valid');
+    small.style.visibility = 'hidden';
+  } else {
+    input.classList.remove('is-valid');
+    input.classList.add('is-invalid');
     small.style.visibility = 'visible';
-    input.className = 'error';
+  }
 }
 
-function showSuccess(input) {
-    input.className = 'success';
+function validateFirstName() {
+  const value = firstNameInput.value.trim();
+  const isValid = /^[A-Za-z]+$/.test(value);
+  toggleError(firstNameInput, value.length > 0 && isValid);
+  return value.length > 0 && isValid;
 }
 
-function checkRequired(inputArr) {
-    let isRequired = false;
-    inputArr.forEach(function(input) {
-        if (input.value.trim() === '') {
-            showError(input, `${getFieldName(input)} is required`);
-            isRequired = true;
-        } else {
-            showSuccess(input);
-        }
-    });
-    return isRequired;
+function validateLastName() {
+  const value = lastNameInput.value.trim();
+  const isValid = /^[A-Za-z]+$/.test(value);
+  toggleError(lastNameInput, value.length > 0 && isValid);
+  return value.length > 0 && isValid;
 }
 
-function checkLength(input, min) {
-    if (input.value.length < min) {
-        showError(input, `${getFieldName(input)} must be at least ${min} characters`);
-    } else {
-        showSuccess(input);
-    }
+function validateEmailInput() {
+  const value = emailInput.value.trim();
+  const isValid = validateEmail(value);
+  toggleError(emailInput, value.length > 0 && isValid);
+  return value.length > 0 && isValid;
 }
 
-function checkEmail(input) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()\[\]\\.,;:\s@"]+\.)+[^<>()\[\]\\.,;:\s@"]{2,})$/i;
-    if (re.test(input.value.trim())) {
-        showSuccess(input);
-    } else {
-        showError(input, 'Email is not valid');
-    }
+function validatePassword() {
+  const value = passwordInput.value.trim();
+  const isValid = value.length >= 6;
+  toggleError(passwordInput, value.length > 0 && isValid);
+  return value.length >= 6 && isValid;
 }
 
-function checkPasswordsMatch(input1, input2) {
-    if (input1.value !== input2.value) {
-        showError(input2, 'Passwords do not match');
-    } else {
-        showSuccess(input2);
-    }
-}
-
-function getFieldName(input) {
-    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
-}
-
-function validateForm() {
-    const firstName = document.getElementById('firstName');
-    const lastName = document.getElementById('lastName');
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
-    const confirmPassword = document.getElementById('confirmPassword');
-
-    if (!checkRequired([firstName, lastName, email, password, confirmPassword])) {
-        checkLength(password, 6);
-        checkEmail(email);
-        checkPasswordsMatch(password, confirmPassword);
-        
-        if (
-            firstName.className === 'success' &&
-            lastName.className === 'success' &&
-            email.className === 'success' &&
-            password.className === 'success' &&
-            confirmPassword.className === 'success'
-        ) {
-            alert('Registration successful');
-        }
-    }
+function validateConfirmPassword() {
+  const passwordValue = passwordInput.value.trim();
+  const confirmPasswordValue = confirmPasswordInput.value.trim();
+  const isValid = confirmPasswordValue === passwordValue;
+  toggleError(confirmPasswordInput, confirmPasswordValue.length > 0 && isValid);
+  return confirmPasswordValue === passwordValue;
 }
 
 function resetForm() {
-    const formGroups = document.querySelectorAll('.form-group input');
-    formGroups.forEach(function(input) {
-        input.className = '';
-    });
+  firstNameInput.value = '';
+  lastNameInput.value = '';
+  emailInput.value = '';
+  passwordInput.value = '';
+  confirmPasswordInput.value = '';
 
-    const smalls = document.querySelectorAll('.form-group small');
-    smalls.forEach(function(small) {
-        small.style.visibility = 'hidden';
-    });
+  firstNameInput.classList.remove('is-invalid', 'is-valid');
+  lastNameInput.classList.remove('is-invalid', 'is-valid');
+  emailInput.classList.remove('is-invalid', 'is-valid');
+  passwordInput.classList.remove('is-invalid', 'is-valid');
+  confirmPasswordInput.classList.remove('is-invalid', 'is-valid');
 }
+
+firstNameInput.addEventListener('input', validateFirstName);
+lastNameInput.addEventListener('input', validateLastName);
+emailInput.addEventListener('input', validateEmailInput);
+passwordInput.addEventListener('input', validatePassword);
+confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+
+submitBtn.addEventListener('click', function(event) {
+  event.preventDefault();
+
+  const isFirstNameValid = validateFirstName();
+  const isLastNameValid = validateLastName();
+  const isEmailValid = validateEmailInput();
+  const isPasswordValid = validatePassword();
+  const isConfirmPasswordValid = validateConfirmPassword();
+
+  if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid) {
+    alert('Registered successfully');
+    resetForm();
+  } else {
+    alert('Please fix the errors in the form');
+  }
+});
+
+resetBtn.addEventListener('click', resetForm);
